@@ -69,7 +69,9 @@ module toggle_synchronizer #(
   assign unused_src = src_clk & src_rst_n;
 
   // Two-stage synchronizer chain, WIDTH bits wide.
-  (* DONT_TOUCH = "TRUE" *) (* async_reg = "true" *) logic [WIDTH-1:0] stage1, stage2;
+  // Separate declarations ensure synthesis tools apply async_reg per stage.
+  (* DONT_TOUCH = "TRUE" *) (* async_reg = "true" *) logic [WIDTH-1:0] stage1;
+  (* DONT_TOUCH = "TRUE" *) (* async_reg = "true" *) logic [WIDTH-1:0] stage2;
 
   always_ff @(posedge dst_clk or negedge dst_rst_n) begin
     if (!dst_rst_n) begin
