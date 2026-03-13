@@ -136,13 +136,12 @@ module weighted_round_robin_arbiter #(
                     if (credit_cnt > {{(WEIGHT_WIDTH-1){1'b0}}, 1'b1}) begin
                         credit_cnt <= credit_cnt - 1'b1;
                     end else begin
-                        // Credit exhausted; rotate ptr past current winner
-                        ptr        <= {gnt_next[NUM_REQS-2:0], gnt_next[NUM_REQS-1]};
-                        credit_cnt <= '0; // Will be reloaded on next new winner
+                        // Credit exhausted; rotate ptr past the departing winner
+                        ptr        <= {gnt[NUM_REQS-2:0], gnt[NUM_REQS-1]};
+                        credit_cnt <= '0; // Will be reloaded when next winner is selected
                     end
                 end else if (gnt_next != '0) begin
                     // New winner selected; load its weight
-                    ptr        <= ptr; // ptr moves only when credit expires
                     credit_cnt <= eff_weight - 1'b1;
                 end
             end
