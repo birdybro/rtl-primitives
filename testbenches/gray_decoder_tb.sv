@@ -12,7 +12,7 @@ module gray_decoder_tb;
 
     // Test round-trip: encode then decode should give original binary
     for (int i=0; i<(1<<W); i++) begin
-      logic [W-1:0] gray = W'(i) ^ (W'(i) >> 1);
+      automatic logic [W-1:0] gray = W'(i) ^ (W'(i) >> 1);
       gray_in = gray; #1;
       if (bin_out !== W'(i)) begin
         $error("gray=%0b bin_out=%0d expected %0d", gray, bin_out, i); fail_cnt++;
