@@ -26,7 +26,7 @@
 //   - Cycles 2..DEPTH+1: shift_reg shifts 0 from MSB each cycle
 //   - Cycle DEPTH+1: shift_reg = 0, por_rst_n deasserts HIGH permanently
 //   - Assumes FFs without explicit reset/preset power up to logic 0 (standard
-//     ASIC behaviour; also the default on most FPGA families)
+//     ASIC behavior; also the default on most FPGA families)
 //
 // Usage Notes:
 //   - Feed por_rst_n into reset_synchronizer in each clock domain.
